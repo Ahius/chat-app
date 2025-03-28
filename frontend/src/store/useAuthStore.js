@@ -33,4 +33,26 @@ export const useAuthStore = create((set) => ({
       set({ isSigninggUp: false });
     }
   },
+  login: async (data) => {
+    set({ isLoggingIng: true });
+    try {
+      const res = await axiosInstance.post("/auth/login", data);
+      set({ authUser: res.data });
+      toast.success("Logged in successfully");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      set({ isLoggingIng: false });
+    }
+  },
+  logout: async () => {
+    try {
+      await axiosInstance.post("/auth/logout");
+      set({ authUser: null });
+      toast.success("Bạn vừa đăng xuất khỏi hệ thống!");
+    } catch (error) {
+      toast.error("Đã xảy ra lỗi trong quá trình đăng xuất");
+      // toast.error(error.response.data.message);
+    }
+  },
 }));

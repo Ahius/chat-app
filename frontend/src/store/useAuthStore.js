@@ -10,6 +10,8 @@ export const useAuthStore = create((set) => ({
   isLoggingIng: false,
   isUpdatingProfile: false,
   isCheckingAuth: true,
+  onlineUsers: [],
+
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/check");
@@ -21,6 +23,7 @@ export const useAuthStore = create((set) => ({
       set({ isCheckingAuth: false });
     }
   },
+
   signup: async (data) => {
     set({ isSigninggUp: true });
     try {
@@ -33,6 +36,7 @@ export const useAuthStore = create((set) => ({
       set({ isSigninggUp: false });
     }
   },
+
   login: async (data) => {
     set({ isLoggingIng: true });
     try {
@@ -45,6 +49,7 @@ export const useAuthStore = create((set) => ({
       set({ isLoggingIng: false });
     }
   },
+
   logout: async () => {
     try {
       await axiosInstance.post("/auth/logout");
@@ -55,6 +60,7 @@ export const useAuthStore = create((set) => ({
       // toast.error(error.response.data.message);
     }
   },
+  
   updateProfile: async (data) => {
     set({ isUpdatingProfile: true });
     try {

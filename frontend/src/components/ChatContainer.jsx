@@ -12,45 +12,16 @@ const ChatContainer = () => {
     useChatStore(); 
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
+
+
   useEffect(() => {
     getMessages(selectedUser._id);
   }, [selectedUser._id, getMessages]);
+
+  console.log("Tin nhan ne: ", messages);
   
-  // useEffect(() => {
-  //   getMessages(selectedUser._id);
+  
 
-  //   subscribeToMessages();
-
-  //   return () => unsubscribeFromMessages();
-  // }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
-
-  // useEffect(() => {
-  //   // Add null check for selectedUser
-  //   if (!selectedUser?._id) return;
-
-  //   getMessages(selectedUser._id);
-
-  //   // Add try-catch for subscribeToMessages
-  //   try {
-  //     subscribeToMessages();
-  //   } catch (error) {
-  //     console.error("Failed to subscribe to messages:", error);
-  //   }
-
-  //   return () => {
-  //     try {
-  //       unsubscribeFromMessages();
-  //     } catch (error) {
-  //       console.error("Failed to unsubscribe from messages:", error);
-  //     }
-  //   };
-  // }, [selectedUser?._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
-
-  // useEffect(() => {
-  //   if (messageEndRef.current && messages) {
-  //     messageEndRef.current.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // }, [messages]);
 
   if (isMessagesLoading) {
     return (
